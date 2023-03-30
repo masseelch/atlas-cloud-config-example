@@ -5,7 +5,7 @@ lint {
 
   naming {
     error   = true
-    match   = "^[a-z]+$"                  # regex to match lowercase letters
+    match   = "^[a-z_]+$"                  # regex to match lowercase letters
     message = "must be lowercase letters" # message to return if a violation is found
   }
 }

@@ -1,0 +1,5 @@
+lint {
+  concurrent_index {
+
+  }
+}

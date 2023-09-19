@@ -38,28 +38,4 @@ jobs:
           dir-format: 'atlas'
           dev-url: "mysql://root:pass@localhost:3306/dev"
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
-  sync:
-    needs: lint
-    if: github.ref == 'refs/heads/main'
-    services:
-      # Spin up a mysql:8 container to be used as the dev-database for analysis.
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_DATABASE: dev
-          MYSQL_ROOT_PASSWORD: pass
-        options: >-
-          --health-cmd "mysqladmin ping -ppass"
-          --health-interval 10s
-          --health-start-period 10s
-          --health-timeout 5s
-          --health-retries 10
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ariga/atlas-sync-action@v0.1.8
-        with:
-          dir: 'migrations'
-          dev-url: "mysql://root:pass@mysql:3306/dev"
-          cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
           cloud-url: https://api.atlasgo.link
